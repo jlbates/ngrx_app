@@ -1,6 +1,6 @@
 const express = require('express');
 const MongoClient = require('mongodb').MongoClient;
-const db = require('./config/db');
+var db = require('./config/db');
 const bodyParser = require('body-parser');
 const app = express();
 
@@ -11,6 +11,7 @@ app.use(bodyParser.json());
 
 MongoClient.connect(db.url)
   .then(function (database) {
+    db = database.db("todos");
     require('./app/routes')(app, database);
 
     app.listen(port, function () {
