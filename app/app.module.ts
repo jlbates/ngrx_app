@@ -11,7 +11,6 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import {TodoListComponent} from './components/todo-list/todo-list.component';
 import {TodoListItemComponent} from './components/todo-list-item/todo-list-item.component';
-import {TodoService} from './services/todo.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +29,7 @@ import {TodoService} from './services/todo.service';
     StoreModule.forRoot({todos: TodoReducer.TodoReducer}),
     EffectsModule.forRoot([TodoEffects])
   ],
-  providers: [TodoService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 
