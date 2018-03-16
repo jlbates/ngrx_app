@@ -18,7 +18,6 @@ var store_1 = require("@ngrx/store");
 var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
 var todo_list_component_1 = require("./components/todo-list/todo-list.component");
 var todo_list_item_component_1 = require("./components/todo-list-item/todo-list-item.component");
-var todo_service_1 = require("./services/todo.service");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -40,7 +39,7 @@ var AppModule = (function () {
                 store_1.StoreModule.forRoot({ todos: TodoReducer.TodoReducer }),
                 effects_1.EffectsModule.forRoot([todo_effects_1.TodoEffects])
             ],
-            providers: [todo_service_1.TodoService],
+            providers: [],
             bootstrap: [app_component_1.AppComponent]
         })
     ], AppModule);
