@@ -38,8 +38,7 @@ var TodoEffects = (function () {
             .mergeMap(function (action) {
             return _this.http.get(environment_1.environment.client.base_url + '/api/todos')
                 .map(function (data) {
-                console.log('get', data);
-                return new TodoActions.GetTodosSuccess(data['data']['docs']);
+                return new TodoActions.GetTodosSuccess(data);
             })
                 .catch(function () { return of_1.of(new TodoActions.GetTodoError()); });
         });

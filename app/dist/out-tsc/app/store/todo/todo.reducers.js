@@ -37,7 +37,11 @@ function TodoReducer(state, action) {
             return __assign({}, state, { loaded: false, loading: true });
         }
         case todo_constants_1.TODOS.GET_TODOS_SUCCESS: {
+            console.log('IN GET TODOS SUCCESS');
             return __assign({}, state, { todos: action.payload.concat([defaultTodoStates[0]]), loading: false });
+        }
+        case todo_constants_1.TODOS.GET_TODOS_ERROR: {
+            return __assign({}, state, { todos: state.todos.concat([action.payload]) });
         }
         case todo_constants_1.TODOS.DELETE_TODO: {
             return __assign({}, state, state.todos.splice(state.todos.indexOf(action.payload), 1));
