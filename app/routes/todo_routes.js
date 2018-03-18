@@ -1,11 +1,14 @@
+var ObjectID = require('bson').ObjectID;
+
 //todo routes
 module.exports = function (app, db) {
 
 
   app.post('/api/todos', function (req, res) {
     // Create TODO object from request.
+    const id =  new ObjectID();
     const todo = {
-      _id: req.body._id,
+      _id: id,
       title: req.body.title,
       description: req.body.description,
       date: req.body.date,
@@ -33,5 +36,16 @@ module.exports = function (app, db) {
       })
   });
 
-
+  app.delete('/api/todos/', function (req, res) {
+    const id = req.params.id;
+    const details = {'_id': id};
+    db.collection('todo').remove(details)
+      .then(function (res) {
+        console.log('RES', res);
+        res.send({'success':'Todo ' + id + ' deleted!'});
+      })
+      .catch(function (err) {
+        res.send({'error':'An error has occurred ' + err});
+      })
+  });
 };

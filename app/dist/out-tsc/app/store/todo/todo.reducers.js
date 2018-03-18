@@ -33,11 +33,9 @@ function TodoReducer(state, action) {
     if (state === void 0) { state = defaultState; }
     switch (action.type) {
         case todo_constants_1.TODOS.GET_TODOS: {
-            console.log('state in get in reducer to understand what spread operator is doing', state);
             return __assign({}, state, { loaded: false, loading: true });
         }
         case todo_constants_1.TODOS.GET_TODOS_SUCCESS: {
-            console.log('IN GET TODOS SUCCESS');
             return __assign({}, state, { todos: action.payload.concat([defaultTodoStates[0]]), loading: false });
         }
         case todo_constants_1.TODOS.GET_TODOS_ERROR: {
@@ -62,6 +60,7 @@ function TodoReducer(state, action) {
                 }) });
         }
         case todo_constants_1.TODOS.CREATE_TODO_SUCCESS: {
+            console.log('Create success');
             return __assign({}, state, { todos: state.todos.filter(function (t) {
                     return t._id !== 'new';
                 }).concat([__assign({}, action.payload, { edited: true }), __assign({}, todo_model_1.default.generateMockTodo(), todo_state_1.initializeTodoState())]) });

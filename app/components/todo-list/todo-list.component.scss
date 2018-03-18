@@ -1,3 +1,22 @@
+.todo-list-component{
+
+  .row{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .todos{
+    min-width:75%;
+  }
+
+  h1{
+    margin:1.2rem;
+  }
+}
+
+
+// Copy/Paste css spinner.
 .spinner {
   margin: 100px auto;
   width: 50px;
@@ -50,3 +69,8 @@
        -webkit-transform: scaleY(1.0);
      }
 }
+
+
+
+
+

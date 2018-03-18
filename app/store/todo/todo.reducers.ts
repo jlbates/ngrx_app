@@ -36,12 +36,10 @@ export function TodoReducer(state = defaultState, action: Action) {
 
   switch (action.type) {
     case TODOS.GET_TODOS: {
-      console.log('state in get in reducer to understand what spread operator is doing', state);
       return {...state, loaded: false, loading: true};
     }
 
     case TODOS.GET_TODOS_SUCCESS: {
-      console.log('IN GET TODOS SUCCESS');
       return {...state, todos: [...(action as any).payload, defaultTodoStates[0]], loading: false};
     }
 
@@ -84,7 +82,7 @@ export function TodoReducer(state = defaultState, action: Action) {
     }
 
     case TODOS.CREATE_TODO_SUCCESS: {
-
+      console.log('Create success');
       return {
         ...state,
         todos: [...state.todos.filter(t => {

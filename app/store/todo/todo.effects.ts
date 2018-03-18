@@ -36,10 +36,10 @@ export class TodoEffects {
   createTodo$: Observable<Action> = this.actions$
     .ofType<TodoActions.CreateTodo>(TODOS.CREATE_TODO)
     .mergeMap(action =>
-      this.http.post((environment as any).client.base_url + '/api/todos', action.payload)
-        .map((data: Response) => {
+      this.http.post((environment as any).client.base_url + '/api/todos/', action.payload)
+        .map((data) => {
           console.log('create', data);
-          return new TodoActions.CreateTodoSuccess({...data['data'], loading: false});
+          return new TodoActions.CreateTodoSuccess(<any>{...data, loading: false});
         })
         .catch(() => of(new TodoActions.CreateTodoError()))
     );
@@ -50,6 +50,7 @@ export class TodoEffects {
     .mergeMap(action =>
       this.http.delete((environment as any).client.base_url + '/api/todos/' + action.payload._id)
         .map((data: Response) => {
+          console.log('DELETE', data);
           return new TodoActions.DeleteTodoSuccess({...action.payload, loading: false});
         })
         .catch(() => of(new TodoActions.DeleteTodoError(action.payload)))

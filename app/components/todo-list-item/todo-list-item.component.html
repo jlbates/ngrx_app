@@ -1,78 +1,71 @@
-<div class="card">
-  <div class="card-body"
-       *ngIf="todo"
-       [class.done]="todo.status == 'done'"
-       [class.selected]="todo.selected"
-       [class.loading]="todo.loading"
-       [class.editing] = "todo.editing"
-       [class.edited] = "todo.edited"
-       [class.error] = "todo.error"
-  >
+<div class="todo-list-card-component">
+  <div class="card">
+    <div *ngIf="!todo.create" class="card-header"><h6>{{todo.title}}</h6></div>
+    <div *ngIf="todo.create" class="card-header"><h6>Add Todo</h6></div>
+    <div class="card-body"
+         *ngIf="todo"
+         [class.done]="todo.status == 'done'"
+         [class.selected]="todo.selected"
+         [class.loading]="todo.loading"
+         [class.editing]="todo.editing"
+         [class.edited]="todo.edited"
+         [class.error]="todo.error">
 
-    <div class="row">
-      <ng-container *ngIf="!todo.create && !todo.editing">
-
-        <div class="col-md-3">
-
-          <p>{{todo.title}}</p>
-        </div>
-
-        <div class="col-md-2">
-
-          <p>{{todo.description}}</p>
-        </div>
-
-        <div class="col-md-2">
-          <p>{{todo.date | date}}</p>
-        </div>
-
-        <div class="col-md-2">
-          <p>{{todo.status }}</p>
-        </div>
-
-      </ng-container>
-
-      <ng-container *ngIf="todo.create || todo.editing">
-        <div class="col-md-3">
-          <input type="text" name="title" id="title" [(ngModel)]="todo.title">
-        </div>
-
-        <div class="col-md-4">
-
-          <input type="text" style="width: 100%;" name="description" id="description" [(ngModel)]="todo.description">
-        </div>
-
-
-        <div class="col-md-2">
-          <p>{{todo.status }}</p>
-        </div>
-      </ng-container>
-
-
-      <div class="col-md-3 options" >
+      <div class="row">
         <ng-container *ngIf="!todo.create && !todo.editing">
-          <button class="btn btn-success" *ngIf="todo.status != 'done'" (click)="completeTodo(todo)">
-            <i  class="fa fa-check"></i>
-          </button>
-          <button class="btn btn-primary" (click)="editTodo(todo)">
-            <i  class="fa fa-pencil"></i>
-          </button>
-          <button class="btn btn-danger" (click)="this.deleted.emit(todo);">
-            <i  class="fa fa-trash"></i>
-          </button>
-        </ng-container>
-        <ng-container *ngIf="todo.create">
-          <button class="btn btn-success" (click)="createTodo(todo)">
-            Create
-          </button>
+          <div class="col-md-5">
+            <p>{{todo.description}}</p>
+          </div>
+          <div class="col-md-2">
+            <p>{{todo.date | date}}</p>
+          </div>
+          <div class="col-md-2">
+            <p>{{todo.status }}</p>
+          </div>
         </ng-container>
 
-        <ng-container *ngIf="todo.editing">
+        <ng-container *ngIf="todo.create || todo.editing">
+          <div class="col-md-9 create-todo-card">
+            <div class="form-group">
+              <label for="title">Title</label>
+              <input type="text" name="title" id="title" [(ngModel)]="todo.title">
+            </div>
+            <div class="form-group">
+              <label for="description">Description</label>
+              <textarea name="description" id="description" [(ngModel)]="todo.description"></textarea>
+            </div>
+            <ng-container *ngIf="todo.create">
+              <button class="btn btn-success" (click)="createTodo(todo)">
+                Create
+              </button>
+            </ng-container>
 
-          <button class="btn btn-primary" (click)="editTodoSubmit(todo)">
-            Submit
-          </button>
+            <ng-container *ngIf="todo.editing">
+              <button class="btn btn-primary" (click)="editTodoSubmit(todo)">
+                Submit
+              </button>
+            </ng-container>
+
+            <p>{{todo.status }}</p>
+          </div>
         </ng-container>
+
+
+        <div class="col-md-3 options">
+
+          <ng-container *ngIf="!todo.create && !todo.editing">
+            <button class="btn btn-success" *ngIf="todo.status != 'done'" (click)="completeTodo(todo)">
+              <i class="fa fa-check"></i>
+            </button>
+            <button class="btn btn-primary" (click)="editTodo(todo)">
+              <i class="fa fa-pencil"></i>
+            </button>
+            <button class="btn btn-danger" (click)="this.deleted.emit(todo);">
+              <i class="fa fa-trash"></i>
+            </button>
+          </ng-container>
+
+        </div>
       </div>
     </div>
   </div>

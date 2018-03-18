@@ -23,14 +23,11 @@ export class TodoListComponent implements OnInit {
   private todoListState$: Observable<TodoState[]>;
 
   ngOnInit() {
-    console.log('The component is loaded');
     this.todoListState$ = this.store.select(state => state.todos);
-    console.log('this.todoListState$', this.todoListState$);
     this.store.dispatch(new TodoAction.GetTodos());
   }
 
   onCreate(todo) {
-    console.log(todo);
     this.store.dispatch(new TodoAction.CreateTodo(todo));
   }
 

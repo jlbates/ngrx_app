@@ -1,41 +1,65 @@
-.options {
-  display: flex;
-  flex-direction: row;
+.todo-list-card-component {
+  margin: 1.2rem;
 
-  button {
-    flex: 1;
-    margin: 5px;
+  label{
+    display:block;
+  }
+
+  .form-group{
+    min-width: 100%;
+  }
+
+  .options {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: inherit;
+
+    button {
+      flex: 1;
+      margin: 5px;
+    }
+  }
+
+  :host {
+    margin: 10px;
+  }
+
+  .done {
+    background: #79D879;
+  }
+
+  .selected {
+    background: #004700;
+  }
+
+  .loading {
+    background: #A0A0A0;
+  }
+
+  .edited {
+    background: #D570FD;
+  }
+
+  .error {
+    background: #FD7070;
+  }
+
+  div {
+    p {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    .card-header{
+      padding-top:.5rem;
+      padding-bottom:.5rem;
+    }
   }
 }
 
-:host {
-  margin: 10px;
+textarea{
+  min-width:100%;
 }
 
-.done {
-  background: #79D879;
-}
 
-.selected {
-  background: #004700;
-}
-
-.loading {
-  background: #A0A0A0;
-}
-
-.edited {
-  background: #D570FD;
-}
-
-.error {
-  background: #FD7070;
-}
-
-div {
-  p {
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-  }
-}

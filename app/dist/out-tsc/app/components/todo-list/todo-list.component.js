@@ -17,13 +17,10 @@ var TodoListComponent = (function () {
         this.store = store;
     }
     TodoListComponent.prototype.ngOnInit = function () {
-        console.log('The component is loaded');
         this.todoListState$ = this.store.select(function (state) { return state.todos; });
-        console.log('this.todoListState$', this.todoListState$);
         this.store.dispatch(new TodoAction.GetTodos());
     };
     TodoListComponent.prototype.onCreate = function (todo) {
-        console.log(todo);
         this.store.dispatch(new TodoAction.CreateTodo(todo));
     };
     TodoListComponent.prototype.onDelete = function (todo) {

@@ -45,10 +45,10 @@ var TodoEffects = (function () {
         this.createTodo$ = this.actions$
             .ofType(todo_constants_1.TODOS.CREATE_TODO)
             .mergeMap(function (action) {
-            return _this.http.post(environment_1.environment.client.base_url + '/api/todos', action.payload)
+            return _this.http.post(environment_1.environment.client.base_url + '/api/todos/', action.payload)
                 .map(function (data) {
                 console.log('create', data);
-                return new TodoActions.CreateTodoSuccess(__assign({}, data['data'], { loading: false }));
+                return new TodoActions.CreateTodoSuccess(__assign({}, data, { loading: false }));
             })
                 .catch(function () { return of_1.of(new TodoActions.CreateTodoError()); });
         });
@@ -57,6 +57,7 @@ var TodoEffects = (function () {
             .mergeMap(function (action) {
             return _this.http.delete(environment_1.environment.client.base_url + '/api/todos/' + action.payload._id)
                 .map(function (data) {
+                console.log('DELETE', data);
                 return new TodoActions.DeleteTodoSuccess(__assign({}, action.payload, { loading: false }));
             })
                 .catch(function () { return of_1.of(new TodoActions.DeleteTodoError(action.payload)); });

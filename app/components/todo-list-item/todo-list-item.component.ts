@@ -7,7 +7,7 @@ import {Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy}
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class TodoListItemComponent implements OnInit {
+export class TodoListItemComponent {
 
 
   @Input() todo;
@@ -20,13 +20,8 @@ export class TodoListItemComponent implements OnInit {
   constructor() {
   }
 
-  ngOnInit() {
-    console.log(this.todo);
-  }
-
 
   createTodo(todo) {
-    console.log(todo);
     this.created.emit(todo);
   }
 

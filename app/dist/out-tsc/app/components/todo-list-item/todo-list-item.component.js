@@ -17,11 +17,7 @@ var TodoListItemComponent = (function () {
         this.edited = new core_1.EventEmitter();
         this.completed = new core_1.EventEmitter();
     }
-    TodoListItemComponent.prototype.ngOnInit = function () {
-        console.log(this.todo);
-    };
     TodoListItemComponent.prototype.createTodo = function (todo) {
-        console.log(todo);
         this.created.emit(todo);
     };
     TodoListItemComponent.prototype.editTodo = function (todo) {
