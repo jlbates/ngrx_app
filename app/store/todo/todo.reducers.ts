@@ -57,7 +57,7 @@ export function TodoReducer(state = defaultState, action: Action) {
 
 
     case TODOS.DELETE_TODO_SUCCESS: {
-
+      console.log('in delete todo success');
       return state;
     }
 
@@ -68,7 +68,6 @@ export function TodoReducer(state = defaultState, action: Action) {
     }
 
     case TODOS.CREATE_TODO: {
-
       return {
         ...state,
         todos: state.todos.map(t => {
@@ -88,7 +87,7 @@ export function TodoReducer(state = defaultState, action: Action) {
         todos: [...state.todos.filter(t => {
           return t._id !== 'new';
         }),
-          {...(action as any).payload, edited: true},
+          {...(action as any).payload},
           {...Todo.generateMockTodo(), ...initializeTodoState()}]
       };
     }

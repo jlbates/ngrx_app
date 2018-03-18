@@ -28,6 +28,12 @@ var of_1 = require("rxjs/observable/of");
 var todo_constants_1 = require("../../constants/todo/todo.constants");
 var TodoActions = require("./todo.action");
 var http_1 = require("@angular/common/http");
+var http_2 = require("@angular/common/http");
+var httpOptions = {
+    headers: new http_2.HttpHeaders({
+        'Content-Type': 'application/json'
+    })
+};
 var TodoEffects = (function () {
     function TodoEffects(http, actions$) {
         var _this = this;
@@ -45,7 +51,7 @@ var TodoEffects = (function () {
         this.createTodo$ = this.actions$
             .ofType(todo_constants_1.TODOS.CREATE_TODO)
             .mergeMap(function (action) {
-            return _this.http.post(environment_1.environment.client.base_url + '/api/todos/', action.payload)
+            return _this.http.post(environment_1.environment.client.base_url + '/api/todos', action.payload, httpOptions)
                 .map(function (data) {
                 console.log('create', data);
                 return new TodoActions.CreateTodoSuccess(__assign({}, data, { loading: false }));
@@ -55,19 +61,19 @@ var TodoEffects = (function () {
         this.deleteTodo$ = this.actions$
             .ofType(todo_constants_1.TODOS.DELETE_TODO)
             .mergeMap(function (action) {
-            return _this.http.delete(environment_1.environment.client.base_url + '/api/todos/' + action.payload._id)
+            return _this.http.delete(environment_1.environment.client.base_url + '/api/todos/' + action.payload._id, httpOptions)
                 .map(function (data) {
                 console.log('DELETE', data);
-                return new TodoActions.DeleteTodoSuccess(__assign({}, action.payload, { loading: false }));
+                return new TodoActions.DeleteTodoSuccess(__assign({}, data, { loading: false }));
             })
                 .catch(function () { return of_1.of(new TodoActions.DeleteTodoError(action.payload)); });
         });
         this.updateTodo$ = this.actions$
             .ofType(todo_constants_1.TODOS.UPDATE_TODO)
             .mergeMap(function (action) {
-            return _this.http.put(environment_1.environment.client.base_url + '/api/todos/', action.payload)
+            return _this.http.put(environment_1.environment.client.base_url + '/api/todos', action.payload, httpOptions)
                 .map(function (data) {
-                return new TodoActions.UpdateTodoSuccess(__assign({}, action.payload, { loading: false, editing: false }));
+                return new TodoActions.UpdateTodoSuccess(__assign({}, data, { loading: false, editing: false }));
             })
                 .catch(function () { return of_1.of(new TodoActions.DeleteTodoError(action.payload)); });
         });

@@ -14,6 +14,14 @@ import * as TodoActions from './todo.action';
 
 import {HttpClient} from '@angular/common/http';
 
+import { HttpHeaders } from '@angular/common/http';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json'
+  })
+};
+
 @Injectable()
 export class TodoEffects {
 
@@ -36,8 +44,8 @@ export class TodoEffects {
   createTodo$: Observable<Action> = this.actions$
     .ofType<TodoActions.CreateTodo>(TODOS.CREATE_TODO)
     .mergeMap(action =>
-      this.http.post((environment as any).client.base_url + '/api/todos/', action.payload)
-        .map((data) => {
+      this.http.post((environment as any).client.base_url + '/api/todos', action.payload, httpOptions)
+        .map((data: Response) => {
           console.log('create', data);
           return new TodoActions.CreateTodoSuccess(<any>{...data, loading: false});
         })
@@ -48,10 +56,10 @@ export class TodoEffects {
   deleteTodo$: Observable<Action> = this.actions$
     .ofType<TodoActions.DeleteTodo>(TODOS.DELETE_TODO)
     .mergeMap(action =>
-      this.http.delete((environment as any).client.base_url + '/api/todos/' + action.payload._id)
+      this.http.delete((environment as any).client.base_url + '/api/todos/' + action.payload._id, httpOptions)
         .map((data: Response) => {
           console.log('DELETE', data);
-          return new TodoActions.DeleteTodoSuccess({...action.payload, loading: false});
+          return new TodoActions.DeleteTodoSuccess(<any>{...data, loading: false});
         })
         .catch(() => of(new TodoActions.DeleteTodoError(action.payload)))
     );
@@ -60,9 +68,9 @@ export class TodoEffects {
   updateTodo$: Observable<Action> = this.actions$
     .ofType<TodoActions.UpdateTodo>(TODOS.UPDATE_TODO)
     .mergeMap(action =>
-      this.http.put((environment as any).client.base_url + '/api/todos/', action.payload)
+      this.http.put((environment as any).client.base_url + '/api/todos', action.payload, httpOptions)
         .map((data: Response) => {
-          return new TodoActions.UpdateTodoSuccess({...action.payload, loading: false, editing: false});
+          return new TodoActions.UpdateTodoSuccess(<any>{...data, loading: false, editing: false});
         })
         .catch(() => of(new TodoActions.DeleteTodoError(action.payload)))
     );
