@@ -46,7 +46,6 @@ export class TodoEffects {
     .mergeMap(action =>
       this.http.post((environment as any).client.base_url + '/api/todos', action.payload, httpOptions)
         .map((data: Response) => {
-          console.log('create', data);
           return new TodoActions.CreateTodoSuccess(<any>{...data, loading: false});
         })
         .catch(() => of(new TodoActions.CreateTodoError()))

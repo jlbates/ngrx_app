@@ -2,12 +2,19 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.3.
 
-## Development server
+[Getting Started with angular effects and ngrx](https://medium.com/@nomanbinhussein/getting-started-with-ngrx-5cec2788b25f)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-You will also need to start the mongo db server when running this application locally. In a seperate tab from the root folder, run
-`npm run dev`. This will start the express server with a connection to a small testing database hosted 
-on `https://mlab.com`
+
+[Build a simple api with nodejs and mongodb](https://medium.freecodecamp.org/building-a-simple-node-js-api-in-under-30-minutes-a07ea9e390d2)
+
+
+## Running and developing locally.
+
+Run `npm start` for a dev server. Navigate to `http://localhost:4302/`. The app will automatically reload if you change any of the source files.
+
+
+Run `npm run dev` to start the express server with a connection to a small testing database hosted 
+on `https://mlab.com`.
 
 ## Code scaffolding
 

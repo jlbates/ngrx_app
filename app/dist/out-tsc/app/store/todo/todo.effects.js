@@ -53,7 +53,6 @@ var TodoEffects = (function () {
             .mergeMap(function (action) {
             return _this.http.post(environment_1.environment.client.base_url + '/api/todos', action.payload, httpOptions)
                 .map(function (data) {
-                console.log('create', data);
                 return new TodoActions.CreateTodoSuccess(__assign({}, data, { loading: false }));
             })
                 .catch(function () { return of_1.of(new TodoActions.CreateTodoError()); });
