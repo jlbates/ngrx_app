@@ -81,7 +81,6 @@ var UpdateTodoSuccess = (function () {
     function UpdateTodoSuccess(payload) {
         this.payload = payload;
         this.type = todo_constants_1.TODOS.UPDATE_TODO_SUCCESS;
-        console.log(this.payload);
     }
     return UpdateTodoSuccess;
 }());

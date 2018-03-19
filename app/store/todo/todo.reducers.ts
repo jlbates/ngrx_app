@@ -19,7 +19,6 @@ const defaultState: TodoListState = {
 };
 
 function modifyTodoState(state, todo: TodoState, modifications): TodoListState {
-
   return {
     ...state,
     todos: state.todos.map(t => {
@@ -55,12 +54,9 @@ export function TodoReducer(state = defaultState, action: Action) {
 
     }
 
-
     case TODOS.DELETE_TODO_SUCCESS: {
-      console.log('in delete todo success');
       return state;
     }
-
 
     case TODOS.DELETE_TODO_ERROR: {
 
@@ -81,7 +77,6 @@ export function TodoReducer(state = defaultState, action: Action) {
     }
 
     case TODOS.CREATE_TODO_SUCCESS: {
-      console.log('Create success');
       return {
         ...state,
         todos: [...state.todos.filter(t => {
@@ -93,22 +88,19 @@ export function TodoReducer(state = defaultState, action: Action) {
     }
 
     case TODOS.UPDATE_TODO: {
-
       return {
         ...state,
         todos: state.todos.map(t => {
           if (t._id === (action as any).payload._id) {
             t.loading = true;
           }
-
           return t;
         })
       };
     }
 
     case TODOS.UPDATE_TODO_SUCCESS: {
-
-      return modifyTodoState(state, (action as any).payload, {});
+      return modifyTodoState(state, (action as any).payload, {loading: false, editing: false});
     }
 
 

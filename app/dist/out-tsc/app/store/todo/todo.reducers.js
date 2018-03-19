@@ -45,7 +45,6 @@ function TodoReducer(state, action) {
             return __assign({}, state, state.todos.splice(state.todos.indexOf(action.payload), 1));
         }
         case todo_constants_1.TODOS.DELETE_TODO_SUCCESS: {
-            console.log('in delete todo success');
             return state;
         }
         case todo_constants_1.TODOS.DELETE_TODO_ERROR: {
@@ -61,7 +60,6 @@ function TodoReducer(state, action) {
                 }) });
         }
         case todo_constants_1.TODOS.CREATE_TODO_SUCCESS: {
-            console.log('Create success');
             return __assign({}, state, { todos: state.todos.filter(function (t) {
                     return t._id !== 'new';
                 }).concat([__assign({}, action.payload), __assign({}, todo_model_1.default.generateMockTodo(), todo_state_1.initializeTodoState())]) });
@@ -75,7 +73,7 @@ function TodoReducer(state, action) {
                 }) });
         }
         case todo_constants_1.TODOS.UPDATE_TODO_SUCCESS: {
-            return modifyTodoState(state, action.payload, {});
+            return modifyTodoState(state, action.payload, { loading: false, editing: false });
         }
         case todo_constants_1.TODOS.UPDATE_TODO_ERROR: {
             return __assign({}, state, { todos: state.todos.map(function (t) {

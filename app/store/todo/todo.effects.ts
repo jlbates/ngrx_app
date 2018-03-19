@@ -58,7 +58,6 @@ export class TodoEffects {
     .mergeMap(action =>
       this.http.delete((environment as any).client.base_url + '/api/todos/' + action.payload._id, httpOptions)
         .map((data: Response) => {
-          console.log('DELETE', data);
           return new TodoActions.DeleteTodoSuccess(<any>{...data, loading: false});
         })
         .catch(() => of(new TodoActions.DeleteTodoError(action.payload)))
@@ -68,9 +67,9 @@ export class TodoEffects {
   updateTodo$: Observable<Action> = this.actions$
     .ofType<TodoActions.UpdateTodo>(TODOS.UPDATE_TODO)
     .mergeMap(action =>
-      this.http.put((environment as any).client.base_url + '/api/todos', action.payload, httpOptions)
+      this.http.put((environment as any).client.base_url + '/api/todos/' + action.payload._id, action.payload, httpOptions)
         .map((data: Response) => {
-          return new TodoActions.UpdateTodoSuccess(<any>{...data, loading: false, editing: false});
+          return new TodoActions.UpdateTodoSuccess(action.payload);
         })
         .catch(() => of(new TodoActions.DeleteTodoError(action.payload)))
     );

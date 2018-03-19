@@ -63,7 +63,6 @@ var TodoEffects = (function () {
             .mergeMap(function (action) {
             return _this.http.delete(environment_1.environment.client.base_url + '/api/todos/' + action.payload._id, httpOptions)
                 .map(function (data) {
-                console.log('DELETE', data);
                 return new TodoActions.DeleteTodoSuccess(__assign({}, data, { loading: false }));
             })
                 .catch(function () { return of_1.of(new TodoActions.DeleteTodoError(action.payload)); });
@@ -71,9 +70,9 @@ var TodoEffects = (function () {
         this.updateTodo$ = this.actions$
             .ofType(todo_constants_1.TODOS.UPDATE_TODO)
             .mergeMap(function (action) {
-            return _this.http.put(environment_1.environment.client.base_url + '/api/todos', action.payload, httpOptions)
+            return _this.http.put(environment_1.environment.client.base_url + '/api/todos/' + action.payload._id, action.payload, httpOptions)
                 .map(function (data) {
-                return new TodoActions.UpdateTodoSuccess(__assign({}, data, { loading: false, editing: false }));
+                return new TodoActions.UpdateTodoSuccess(action.payload);
             })
                 .catch(function () { return of_1.of(new TodoActions.DeleteTodoError(action.payload)); });
         });

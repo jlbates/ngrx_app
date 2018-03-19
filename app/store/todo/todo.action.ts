@@ -70,7 +70,6 @@ export class UpdateTodoSuccess implements Action {
   readonly type = TODOS.UPDATE_TODO_SUCCESS;
 
   constructor(public payload: TodoState) {
-    console.log(this.payload);
   }
 
 }
